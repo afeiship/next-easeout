@@ -11,6 +11,8 @@
   }
 
   nx.easeout = function (inFrom, inTo, inRate, inCallback) {
+    if (inFrom === inTo) return;
+
     var rate = inRate || 2;
     (function step() {
       inFrom = inFrom + (inTo - inFrom) / rate;
