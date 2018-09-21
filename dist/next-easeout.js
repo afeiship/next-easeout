@@ -12,17 +12,19 @@
 
   nx.easeout = function (inFrom, inTo, inRate, inCallback) {
     if (inFrom === inTo) return;
-
     var rate = inRate || 2;
-    (function step() {
-      inFrom = inFrom + (inTo - inFrom) / rate;
+    var callback = inCallback || nx.noop;
 
-      if (inFrom < 1) {
-        inCallback(inTo, true);
+    (function step() {
+
+      inFrom = inFrom + (inTo - inFrom) / rate;
+      if (Math.abs(inFrom - inTo) < 1) {
+        callback(inTo, true);
         return;
       }
-      inCallback(inFrom, false);
+      callback(inFrom, false);
       window.requestAnimationFrame(step);
+
     }());
   };
 
