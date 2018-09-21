@@ -11,16 +11,15 @@
   }
 
   nx.easeout = function (inFrom, inTo, inRate, inCallback) {
-    var from = inFrom || 0;
     var rate = inRate || 2;
     (function step() {
-      from = from + (inTo - from) / rate;
+      inFrom = inFrom + (inTo - inFrom) / rate;
 
-      if (from < 1) {
+      if (inFrom < 1) {
         inCallback(inTo, true);
         return;
       }
-      inCallback(from, false);
+      inCallback(inFrom, false);
       window.requestAnimationFrame(step);
     }());
   };
